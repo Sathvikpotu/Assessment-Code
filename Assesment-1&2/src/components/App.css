@@ -1,0 +1,51 @@
+.container {
+}
+
+.todo-form {
+	max-width: 25%;
+	margin: 0 auto 10px auto;
+	text-align: left;
+}
+
+.todo-list {
+	max-width: 25%;
+	margin: 0 auto 20px auto;
+}
+
+.todo-item {
+	padding: 10px 5px;
+	text-align: left;
+	background: #fff;
+	box-shadow: 1px 1px 2px 2px #e9e9e9;
+	border-radius: 2px;
+	margin-bottom: 5px;
+}
+
+.complete {
+	float: right;
+	margin-right: 12px;
+	height: 25px !important;
+	margin-top: -3px;
+}
+
+.delete {
+	float: right;
+	cursor: pointer;
+	margin-top: -2px;
+}
+
+.todo-item.completed {
+	background: #3fbaf95e;
+	color: #a3aaad;
+	text-decoration: line-through;
+}
+
+.todo-item.completed .complete {
+	cursor: initial;
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.todo-item.completed .delete svg {
+	color: #333;
+}
