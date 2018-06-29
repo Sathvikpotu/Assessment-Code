@@ -19,6 +19,7 @@
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0"
   },
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

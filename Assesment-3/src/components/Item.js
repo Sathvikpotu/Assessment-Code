@@ -5,8 +5,7 @@ import DoneIcon from "@material-ui/icons/Done";
 import CloseIcon from "@material-ui/icons/Close";
 
 class Item extends Component {
-	handleClick = e => {
-		const action = e.currentTarget.getAttribute("action");
+	handleClick = action => {
 		const { id, completed, handleTodoAction } = this.props;
 		if (!completed || action === "delete") {
 			handleTodoAction({
@@ -23,16 +22,15 @@ class Item extends Component {
 		return (
 			<div className={`todo-item ${completed ? "completed" : ""}`}>
 				<span>{title}</span>
-				<span action="delete" className="delete" onClick={this.handleClick}>
+				<span className="delete" onClick={() => this.handleClick('delete')}>
 					<Tooltip id="tooltip-fab" title="Close" placement="top">
 						<CloseIcon color="action" />
 					</Tooltip>
 				</span>
 				<Chip
 					label="Complete"
-					action="complete"
 					className="complete"
-					onClick={this.handleClick}
+					onClick={() => this.handleClick('complete')}
 					deleteIcon={<DoneIcon />}
 				/>
 			</div>

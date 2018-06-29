@@ -8,33 +8,32 @@ import "./App.css";
 
 class Home extends Component {
 	componentDidMount() {
-		this.props.dispatch(getTodos());
+		this.props.getTodos();
 	}
 	handleTodoAction = action => {
 		const { type, payload } = action;
-		const { dispatch } = this.props;
 		switch (type) {
 			case "create":
-				dispatch(addTodo(payload.task));
+				this.props.addTodo(payload.task);
 				break;
 			case "delete":
-				dispatch(deleteTodo(payload.id));
+				this.props.deleteTodo(payload.id);
 				break;
 			case "complete":
-				dispatch(completeTodo(payload.id));
+				this.props.completeTodo(payload.id);
 				break;
 			default:
 		}
 	};
 	createTodo = task => {
-		this.props.dispatch(addTodo(task));
+		this.props.addTodo(task);
 	};
 	deleteTodo = id => {
-		this.props.dispatch(deleteTodo(id));
+		this.props.deleteTodo(id);
 	};
 
 	completeTodo = id => {
-		this.props.dispatch(completeTodo(id));
+		this.props.completeTodo(id);
 	};
 	render() {
 		const { todoList = [] } = this.props.todoData;
@@ -57,9 +56,17 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
+	console.log(state)
 	return {
 		todoData: state.todoData
 	};
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => ({
+	getTodos: () => dispatch(getTodos()),
+	addTodo: (task) => dispatch(addTodo(task)),
+	deleteTodo: (id) => dispatch(deleteTodo(id)),
+	completeTodo: (id) => dispatch(completeTodo(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

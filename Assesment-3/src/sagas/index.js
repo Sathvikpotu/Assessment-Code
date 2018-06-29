@@ -1,8 +1,10 @@
 import { takeEvery } from "redux-saga";
-import { put, call } from "redux-saga/effects";
+import { put } from "redux-saga/effects";
 import {
 	GET_TODOS, GET_TODOS_SUCCESS,
-	CREATE_TODO, DELETE_TODO, COMPLETE_TODO
+	CREATE_TODO, CREATE_TODO_SUCCESS,
+	DELETE_TODO, DELETE_TODO_SUCCESS,
+	COMPLETE_TODO, COMPLETE_TODO_SUCCESS
 } from "../actions";
 
 const BASE_URL = "https://practiceapi.devmountain.com/api";
@@ -45,19 +47,19 @@ function* getTodos() {
 function* createTodo(data) {
 	const response = yield createTask(data.task);
 	const json = yield response.json();
-	yield put({ type: GET_TODOS_SUCCESS, payload: { task: json } });
+	yield put({ type: CREATE_TODO_SUCCESS, payload: { task: json } });
 }
 
 function* deleteTodo(data) {
 	const response = yield deleteTask(data.taskId);
 	const json = yield response.json();
-	yield put({ type: GET_TODOS_SUCCESS, payload: { task: json } });
+	yield put({ type: DELETE_TODO_SUCCESS, taskId: data.taskId });
 }
 
 function* completeTodo(data) {
 	const response = yield completeTask(data.taskId);
 	const json = yield response.json();
-	yield put({ type: GET_TODOS_SUCCESS, payload: { task: json } });
+	yield put({ type: COMPLETE_TODO_SUCCESS, taskId: data.taskId });
 }
 
 export default function* rootSaga() {
